@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Safari Gemini Form Assistant",
+  "version": "1.7.0",
+  "description": "Gemini answers for Google Forms with per-question loading indicators, retries and keyboard shortcut. Never submits forms.",
+  "permissions": ["storage", "tabs", "scripting"],
+  "host_permissions": [
+    "https://docs.google.com/forms/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://*.googleusercontent.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{
+    "matches": ["https://docs.google.com/forms/*"],
+    "js": ["content.js"], "css": ["content.css"], "run_at": "document_idle"
+  }],
+  "options_page": "options.html",
+  "commands": {
+    "fill-google-form": {
+      "suggested_key": { "default": "Ctrl+Shift+U", "mac": "Command+Shift+U" },
+      "description": "Ask Gemini to fill unanswered Google Forms questions"
+    }
+  }
+}

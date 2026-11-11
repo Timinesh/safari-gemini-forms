@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Safari Gemini Form Assistant — Settings</title>
+<style>
+:root{color-scheme:light dark;font:15px -apple-system,BlinkMacSystemFont,Arial,sans-serif}
+body{max-width:680px;margin:38px auto;padding:0 22px;line-height:1.5}
+h1{font-size:25px;margin:0 0 8px}p,small{color:#707984}label:not(.check){display:block;font-weight:650;margin:18px 0 6px}
+input[type=password],input[type=text],select{display:block;width:100%;box-sizing:border-box;padding:10px;font:inherit;border:1px solid #a3a3a3;border-radius:8px;background:transparent}
+.check{display:flex;align-items:flex-start;gap:12px;margin:13px 0;font-weight:400}
+.check input{margin-top:5px}button{font:inherit;border:0;padding:10px 15px;border-radius:8px;background:#245cc4;color:#fff;cursor:pointer;margin:12px 6px 5px 0}
+button.secondary{background:#555}button:disabled{opacity:.6;cursor:progress}
+#result{min-height:25px;font-weight:600;color:inherit}#lastRun{white-space:pre-wrap;color:inherit}
+kbd{border:1px solid #aaa;padding:2px 5px;border-radius:4px}
+</style></head><body>
+<h1>Safari Gemini Form Assistant</h1>
+<p>On a Google Form, press <kbd>⌘ + Shift + U</kbd> to process unanswered questions. Each question now has its own clickable status button: ✦ ready, ⟳ processing, ✓ filled, ! failed. Hover the button for details.</p>
+<form id="settings">
+<label for="key">Gemini API key</label><input type="password" id="key" autocomplete="off" required>
+<small>Get an API key from <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">Google AI Studio</a>. Stored in Safari extension-local storage.</small>
+<label for="model">Gemini model ID</label><input type="text" id="model" value="gemini-3.8-flash" spellcheck="false">
+<button class="secondary" id="models" type="button">Load available models</button>
+<select id="modelChoices" aria-label="Available Gemini models" hidden></select>
+<p id="activeModel"></p>
+<label for="checkboxMode">Checkbox questions</label>
+<select id="checkboxMode"><option value="all">Select all correct options</option><option value="one">Select one best option</option></select>
+<label class="check"><input type="checkbox" id="fillText">Also fill short-answer and paragraph questions</label>
+<label class="check"><input type="checkbox" id="overwrite">Re-answer questions with existing selections when using the shortcut</label>
+<label class="check"><input type="checkbox" id="fallbackOnOverload">Fallback to gemini-3.5-flash-lite on persistent Gemini overload/rate limit</label>
+<button type="submit">Save settings</button><button type="button" id="test" class="secondary">Test Gemini connection</button>
+<p id="result" role="status"></p><p id="lastRun" aria-live="polite"></p>
+</form>
+<p><small><strong>Website access:</strong> Safari must allow this extension to access docs.google.com and generativelanguage.googleapis.com. Review in Safari → Settings → Extensions → Edit Websites. If you update the extension, refresh the form. Answers are not submitted automatically. Text/options and any question image are sent to Gemini for processing; review responses.</small></p>
+<p><small>Some Google Forms layouts can change. Red ! buttons show local errors on hover, including network or rate-limit problems. Re-click an individual status button to retry or overwrite just that question.</small></p>
+<script src="options.js"></script></body></html>
